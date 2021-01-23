@@ -234,7 +234,11 @@ void WenYuDrag::setForce() const
     scalar dragCoefficient(0);
 
     //-------------Added for NN-------//
+#ifdef COMPRE
     volVectorField gradP_ = fvc::grad(p_);
+#else
+    volVectorField gradP_ = fvc::grad(p_*rhoField);
+#endif
     vector gradP;
     scalar dragCorrection(1.);
     scalar driftFlux(0.0);
